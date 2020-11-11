@@ -1,9 +1,6 @@
 package com.example.bookstore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +16,9 @@ public class Author {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @ManyToOne
+    private Book books;
 
     public int getAuthorID() {
         return authorID;

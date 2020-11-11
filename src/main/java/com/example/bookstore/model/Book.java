@@ -2,8 +2,10 @@ package com.example.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,17 +22,13 @@ public class Book {
     @Column(name = "title", unique = true)
     private String title;
 
-    @Column(name = "genre")
-    private String genre;
+    @Column(name = "publisher")
+    private String publisher;
 
-    @Column(name = "stock")
-    private int stock;
+    @Column(name = "published_date")
+    @DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
+    private Date publishedDate;
 
-    @Column(name = "rating")
-    private int rating;
-
-    @Column(name = "price")
-    private int price;
 
     @OneToMany(fetch = FetchType.EAGER,targetEntity = Author.class,cascade = CascadeType.ALL)
     public List<Author> authors;
@@ -51,36 +49,28 @@ public class Book {
         this.title = title;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
-    public int getStock() {
-        return stock;
+    public Date getPublishedDate() {
+        return publishedDate;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
     }
 
-    public int getRating() {
-        return rating;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     @Override
@@ -89,15 +79,14 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return bookID == book.bookID &&
-                stock == book.stock &&
-                rating == book.rating &&
-                price == book.price &&
                 Objects.equals(title, book.title) &&
-                Objects.equals(genre, book.genre);
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(publishedDate, book.publishedDate) &&
+                Objects.equals(authors, book.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookID, title, genre, stock, rating, price);
+        return Objects.hash(bookID, title, publisher, publishedDate, authors);
     }
 }

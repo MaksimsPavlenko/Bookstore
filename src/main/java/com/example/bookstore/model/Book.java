@@ -3,10 +3,8 @@ package com.example.bookstore.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,6 +31,9 @@ public class Book {
 
     @Column(name = "price")
     private int price;
+
+    @OneToMany(fetch = FetchType.EAGER,targetEntity = Author.class,cascade = CascadeType.ALL)
+    public List<Author> authors;
 
     public int getBookID() {
         return bookID;

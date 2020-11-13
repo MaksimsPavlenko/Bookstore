@@ -21,17 +21,23 @@
                 <th>Title</th>
                 <th>Publisher</th>
                 <th>PublishedDate</th>
+                <th>Author</th>
+
             </tr>
-            </thead>
-            <tbody>git
-            <tr th:each="books : ${books}">
-                <td th:text="${books.title}"></td>
-                <td th:text="${books.publisher}"></td>
-                <td th:text="${#calendars.format(book.publishedDate, 'dd.MM.yyyy')}"></td>
-                <td th:text="${books.authors}"></td>
-                <td><a th:href="@{delete-book/{id}(id=${book.bookID})}">Delete</a></td>
-            </tr>
-            </tbody>
+                </thead>
+                    <tbody>
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.publisher}"></td>
+                        <td th:text="${#calendars.format(book.publishedDate, 'dd.MM.yyyy')}"></td>
+
+                        <div th:each="author : ${book.authors}">
+                            <td th:text="${author.firstName + ' ' + author.lastName + '  '}"></td>
+                        </div>
+
+                        <td><a th:href="@{delete-book/{id}(id=${book.bookID})}">Delete</a></td>
+                    </tr>
+                </tbody>
         </table>
     </div>
     <p><a href="/addBooks">Create Book</a></p>

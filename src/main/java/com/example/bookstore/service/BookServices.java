@@ -40,7 +40,7 @@ public class BookServices {
             bookData.setTitle(book.getTitle());
             bookData.setPublisher(book.getPublisher());
             bookData.setPublishedDate(book.getPublishedDate());
-            bookData.getAuthors();
+            bookData.setAuthors(book.getAuthors());
             titleAuthor.add(bookData);
         });
         return titleAuthor;

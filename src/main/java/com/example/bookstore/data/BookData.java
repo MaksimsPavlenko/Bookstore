@@ -17,7 +17,7 @@ public class BookData {
     private String publisher;
     private Date publishedDate;
 
-    List<Author> authors;
+    private List<Author> authors;
 
     public BookData() {
 

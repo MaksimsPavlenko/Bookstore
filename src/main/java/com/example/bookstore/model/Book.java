@@ -29,9 +29,6 @@ public class Book {
     @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "author_fk")
-    private String authorFK;
-
     @NotNull
     @Column(name = "published_date")
     @DateTimeFormat(pattern="yyyy-MM-dd")

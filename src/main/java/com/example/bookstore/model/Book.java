@@ -2,6 +2,8 @@ package com.example.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sun.istack.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,19 +21,32 @@ public class Book {
     @Column(name = "book_id")
     private int bookID;
 
+    @NotNull
     @Column(name = "title", unique = true)
     private String title;
 
+    @NotNull
     @Column(name = "publisher")
     private String publisher;
 
-    @Column(name = "published_date")
-    @DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
-    private Date publishedDate;
+    @Column(name = "author_fk")
+    private String authorFK;
 
+    @NotNull
+    @Column(name = "published_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date publishedDate;
 
     @OneToMany(fetch = FetchType.EAGER,targetEntity = Author.class,cascade = CascadeType.ALL)
     public List<Author> authors;
+
+    public Book(){
+
+    }
+    public Book(String title, String firstName,String lastName){
+        this.title = title;
+
+    }
 
     public int getBookID() {
         return bookID;

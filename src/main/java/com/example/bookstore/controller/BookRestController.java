@@ -1,5 +1,6 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.data.BookData;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.service.BookServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,15 @@ public class BookRestController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public Book addBook(@RequestBody Book book){
         return bookServices.addBook(book);
+    }
+
+    @RequestMapping(value = "/booksTitleAndAuthor", method = RequestMethod.GET)
+    public List<BookData> booksTitleAndAuthor(){
+        return bookServices.titleAndAuthor();
+    }
+    //test
+    @RequestMapping(value = "/booksTitleAndAuthorWithQuery", method = RequestMethod.GET)
+    public List<Book> booksTitleAndAuthorWithQuery(){
+        return bookServices.titleAndAuthorQuery();
     }
 }

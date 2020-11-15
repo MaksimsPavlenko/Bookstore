@@ -19,7 +19,7 @@ public class AuthorRestController {
         return authorServices.findAllAuthors();
     }
 
-    @RequestMapping(value = "/addAuthor", method = RequestMethod.POST)
+    @RequestMapping(value = "/addAuthors", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public Author addAuthor(@RequestBody Author author){
         return authorServices.addAuthor(author);
